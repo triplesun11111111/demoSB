@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <style>
+        body {
+            background-color: #ffb6c1; /* Розовый фон */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 90%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #ff69b4;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        td form {
+            display: inline;
+        }
+
+        input[type="submit"] {
+            background-color: white;
+            color: black;
+            border: 2px solid #ff69b4;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ff69b4;
+            color: white;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        input[type="button"] {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: block;
+            margin: 20px auto;
+        }
+
+        input[type="button"]:hover {
+            background-color: #ff1493;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+
+<h2 style="text-align: center; color: #ff1493;">Users List</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Age</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.getName()}"></td>
+        <td th:text="${user.getSurname()}"></td>
+        <td th:text="${user.getAge()}"></td>
+
+        <td>
+            <form th:method="POST" th:action="@{/users/edit(id=${user.id})}" th:object="${user}">
+                <input type="submit" value="EDIT USER"/>
+            </form>
+        </td>
+
+        <td>
+            <form th:method="POST" th:action="@{/users/delete}" th:object="${user}">
+                <input type="hidden" name="id" th:value="${user.id}" />
+                <input type="hidden" name="_method" value="DELETE" />
+                <input type="submit" value="DELETE USER"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<input type="button" value="Add User" onclick="window.location.href='/spring_mvc_war_exploded/new'">
+</body>
+</html>

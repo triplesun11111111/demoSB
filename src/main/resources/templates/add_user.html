@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+    <style>
+        body {
+            background-color: #ff7388;
+            font-family: Arial, sans-serif;
+        }
+        h1, h3 {
+            color: #8a7911;
+            text-align: center;
+        }
+        form {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        label {
+            font-size: 1.2rem;
+            color: #8a7911;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: pink;
+            border: 2px solid #8a7911;
+            border-radius: 5px;
+            color: #8a7911;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #8a7911;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Create a New User</h1>
+
+<form th:action="@{/new}" th:method="POST" th:object="${user}">
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+
+    <label for="surname">Enter surname: </label>
+    <input type="text" th:field="*{surname}" id="surname"/>
+
+    <label for="age">Enter age: </label>
+    <input type="number" th:field="*{age}" id="age"/>
+
+    <input type="submit" value="Create User"/>
+</form>
+
+</body>
+</html>
